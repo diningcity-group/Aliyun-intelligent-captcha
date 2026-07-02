@@ -1,0 +1,28 @@
+PATH
+  remote: .
+  specs:
+    aliyun_intelligent_captcha (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.27.0)
+    rake (13.4.2)
+
+PLATFORMS
+  arm64-darwin-25
+  ruby
+
+DEPENDENCIES
+  aliyun_intelligent_captcha!
+  minitest (~> 5.0)
+  rake (~> 13.0)
+
+CHECKSUMS
+  aliyun_intelligent_captcha (0.1.0)
+  bundler (4.0.15) sha256=a4ceb882fe94a0e0ac63cd0813932bbfd631a14e5ac0b7975189b19a4d28d9e7
+  minitest (5.27.0)
+  rake (13.4.2)
+
+BUNDLED WITH
+  4.0.15
