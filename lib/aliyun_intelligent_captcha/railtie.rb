@@ -6,7 +6,7 @@ require_relative "configuration"
 require_relative "rails/controller_helpers"
 
 module AliyunIntelligentCaptcha
-  class Railtie < Rails::Railtie
+  class Railtie < ::Rails::Railtie
     config.aliyun_intelligent_captcha = Configuration.new
 
     initializer "aliyun_intelligent_captcha.configure" do |app|

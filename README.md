@@ -4,6 +4,15 @@ Ruby gem for verifying Alibaba Cloud intelligent captcha tokens with the `Verify
 
 It has no runtime dependency on the Alibaba Cloud SDK. The client signs requests with Alibaba Cloud ACS3-HMAC-SHA256 and uses Ruby's standard `Net::HTTP`.
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for version history and release notes.
+
+## Latest Release
+
+- `0.1.1`
+- Fix railtie inheritance to use top-level `::Rails::Railtie`, preventing constant lookup conflicts in Rails apps.
+
 ## Installation
 
 Add this line to your application's Gemfile:
