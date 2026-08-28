@@ -15,7 +15,7 @@ require_relative "result"
 module AliyunIntelligentCaptcha
   class Client
     ACTION = "VerifyIntelligentCaptcha"
-    CONTENT_TYPE = "application/json; charset=utf-8"
+    CONTENT_TYPE = "application/x-www-form-urlencoded"
     SIGNATURE_ALGORITHM = "ACS3-HMAC-SHA256"
 
     def initialize(access_key_id:,
@@ -57,12 +57,15 @@ module AliyunIntelligentCaptcha
 
     def perform_request(payload)
       uri = URI::HTTPS.build(host: @endpoint, path: "/")
-      body = JSON.generate(payload)
+      body = URI.encode_www_form(payload)
       request = Net::HTTP::Post.new(uri)
       request.body = body
       signed_headers(body).each { |key, value| request[key] = value }
+      @logger&.info("[aliyun_intelligent_captcha] request: POST https://#{@endpoint}/ body=#{body.inspect}")
 
       response = @http_client ? @http_client.call(request, uri) : net_http_request(uri, request)
+      @logger&.info("[aliyun_intelligent_captcha] response: status=#{response.code} body=#{response.body}")
+
       validate_response!(response)
       response
     rescue Timeout::Error, SocketError, SystemCallError, OpenSSL::SSL::SSLError => error
