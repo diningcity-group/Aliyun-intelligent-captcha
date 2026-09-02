@@ -12,7 +12,7 @@ module AliyunIntelligentCaptcha
     def passed?
       truthy?(fetch_value("VerifyResult")) ||
         truthy?(fetch_value("Passed")) ||
-        truthy?(fetch_value("Result")) ||
+        verify_result_from_result_hash? ||
         success_code?
     end
 
@@ -44,6 +44,13 @@ module AliyunIntelligentCaptcha
 
     def truthy?(value)
       value == true || value.to_s.casecmp("true").zero? || value.to_s == "1"
+    end
+
+    def verify_result_from_result_hash?
+      result = fetch_value("Result")
+      return false unless result.is_a?(Hash)
+
+      truthy?(result["VerifyResult"]) || (result["VerifyCode"] == "T001")
     end
   end
 end
